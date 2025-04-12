@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Chống Gian Lận Thẻ Tín Dụng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/TrangChu.css') }}">
+</head>
+<body>
+    {% include "partials/header.html" %}
+
+    {% block content %}
+        {% include "partials/hero.html" %}
+        {% include "partials/features.html" %}
+        {% include "partials/stats.html" %}
+        {% include "partials/news.html" %}
+    {% endblock %}
+
+    {% include "partials/footer.html" %}
+</body>
+</html>

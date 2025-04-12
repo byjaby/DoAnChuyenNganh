@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức - SafeCredit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/TrangChu.css') }}">
+</head>
+<body>
+    {% include "partials/header.html" %}
+
+    <section class="news-section" style="margin-top: 100px;">
+        <div class="container">
+            <h2 class="section-title">Tất cả tin tức</h2>
+            <div class="news-grid">
+                {% for news in news_items %}
+                <div class="news-card">
+                    <div class="news-content">
+                        <span class="news-date"><i class="far fa-calendar-alt"></i> {{ news.date }}</span>
+                        <h3>{{ news.title }}</h3>
+                        <p>
+                            {{ news.content[:120] }}{% if news.content|length > 120 %}...{% endif %}
+                        </p>
+                        {% if news.content|length > 120 %}
+                        <a href="#">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include "partials/footer.html" %}
+</body>
+</html>

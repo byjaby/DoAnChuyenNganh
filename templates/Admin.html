@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Hệ Thống Chống Gian Lận Thẻ Tín Dụng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Admin.css') }}">
+
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-shield-alt"></i> SafeCredit</h3>
+            <button class="toggle-btn"><i class="fas fa-bars"></i></button>
+        </div>
+
+        <div class="admin-info">
+            <div class="admin-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="admin-name">Nguyễn Văn Admin</div>
+            <div class="admin-role">Quản trị viên</div>
+        </div>
+
+        <div class="sidebar-menu">
+            <div class="menu-category">Quản lý chung</div>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-exchange-alt"></i> Giao dịch
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-exclamation-triangle"></i> Báo cáo gian lận
+                <span class="badge">12</span>
+            </a>
+
+            <div class="menu-category">Nội dung</div>
+            <a href="/news" class="menu-item">
+                <i class="fas fa-newspaper"></i> Quản lý tin tức
+            </a>
+            <a href="/knowledgeBase" class="menu-item">
+                <i class="fas fa-book"></i> Cơ sở kiến thức
+            </a>
+
+            <div class="menu-category">Quản lý người dùng</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i> Danh sách người dùng
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-user-plus"></i> Thêm người dùng
+            </a>
+
+            <div class="menu-category">Cài đặt</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i> Cài đặt hệ thống
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-user-cog"></i> Cài đặt tài khoản
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="topbar">
+            <button class="toggle-sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="user-menu">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">5</span>
+                </button>
+
+                <button class="messages-btn">
+                    <i class="fas fa-envelope"></i>
+                    <span class="notification-count">3</span>
+                </button>
+
+                <div class="user-profile">
+                    <div class="user-avatar">NV</div>
+                    <span>Nguyễn Văn Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <h1 class="page-title">Dashboard</h1>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>2,567</h4>
+                        <p>Tổng giao dịch hôm nay</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>48</h4>
+                        <p>Giao dịch gian lận</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>12</h4>
+                        <p>Báo cáo đang xử lý</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>156</h4>
+                        <p>Người dùng hoạt động</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="left-column">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Giao dịch gần đây</h3>
+                            <a href="#" class="button">Xem tất cả</a>
+                        </div>
+                        <div class="card-content">
+                            <table class="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Người dùng</th>
+                                        <th>Số thẻ</th>
+                                        <th>Loại</th>
+                                        <th>Số tiền</th>
+                                        <th>Thời gian</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#34562</td>
+                                        <td>Trần Văn A</td>
+                                        <td>xxxx-xxxx-xxxx-5678</td>
+                                        <td>Online</td>
+                                        <td>1,250,000 đ</td>
+                                        <td>10:45 11/04/2025</td>
+                                        <td><span class="status valid">Hợp lệ</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#34561</td>
+                                        <td>Nguyễn Thị B</td>
+                                        <td>xxxx-xxxx-xxxx-9012</td>
+                                        <td>ATM</td>
+                                        <td>500,000 đ</td>
+                                        <td>10:30 11/04/2025</td>
+                                        <td><span class="status fraud">Gian lận</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#34560</td>
+                                        <td>Lê Văn C</td>
+                                        <td>xxxx-xxxx-xxxx-3456</td>
+                                        <td>POS</td>
+                                        <td>3,500,000 đ</td>
+                                        <td>10:15 11/04/2025</td>
+                                        <td><span class="status pending">Đang xem xét</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#34559</td>
+                                        <td>Phạm Thị D</td>
+                                        <td>xxxx-xxxx-xxxx-7890</td>
+                                        <td>Chuyển khoản</td>
+                                        <td>2,000,000 đ</td>
+                                        <td>10:00 11/04/2025</td>
+                                        <td><span class="status valid">Hợp lệ</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#34558</td>
+                                        <td>Hoàng Văn E</td>
+                                        <td>xxxx-xxxx-xxxx-1234</td>
+                                        <td>Online</td>
+                                        <td>8,500,000 đ</td>
+                                        <td>09:45 11/04/2025</td>
+                                        <td><span class="status fraud">Gian lận</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Báo cáo gian lận gần đây</h3>
+                            <a href="#" class="button">Xem tất cả</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="alert-item">
+                                <div class="alert-icon red">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-info">
+                                    <h4>Giao dịch đáng ngờ từ Nguyễn Thị B</h4>
+                                    <p>ATM rút tiền tại địa điểm lạ với số tiền 500,000 đ</p>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="review-btn">Xem xét</button>
+                                    <button class="confirm-btn">Xác nhận</button>
+                                </div>
+                            </div>
+
+                            <div class="alert-item">
+                                <div class="alert-icon orange">
+                                    <i class="fas fa-flag"></i>
+                                </div>
+                                <div class="alert-info">
+                                    <h4>Giao dịch trực tuyến có mức độ rủi ro cao</h4>
+                                    <p>Giao dịch 8,500,000 đ từ Hoàng Văn E tại website lạ</p>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="review-btn">Xem xét</button>
+                                    <button class="confirm-btn">Xác nhận</button>
+                                </div>
+                            </div>
+
+                            <div class="alert-item">
+                                <div class="alert-icon red">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-info">
+                                    <h4>Nhiều giao dịch liên tiếp trong thời gian ngắn</h4>
+                                    <p>5 giao dịch từ thẻ của Trần Thị F trong vòng 10 phút</p>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="review-btn">Xem xét</button>
+                                    <button class="confirm-btn">Xác nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tin tức mới nhất</h3>
+                            <a href="#" class="button">Thêm mới</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-item">
+                                <div class="news-icon">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="news-info">
+                                    <h4>Phương thức gian lận thẻ tín dụng mới</h4>
+                                    <p class="news-date">Đăng 10/04/2025 bởi Nguyễn Văn Admin</p>
+                                </div>
+                            </div>
+
+                            <div class="news-item">
+                                <div class="news-icon">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="news-info">
+                                    <h4>Nâng cấp thuật toán phát hiện gian lận</h4>
+                                    <p class="news-date">Đăng 05/04/2025 bởi Trần Thị Quản Trị</p>
+                                </div>
+                            </div>
+
+                            <div class="news-item">
+                                <div class="news-icon">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="news-info">
+                                    <h4>5 cách bảo vệ thẻ tín dụng khi mua sắm</h4>
+                                    <p class="news-date">Đăng 01/04/2025 bởi Lê Văn Chuyên Gia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Cơ sở kiến thức</h3>
+                            <a href="#" class="button">Thêm mới</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="knowledge-item">
+                                <div class="knowledge-title">
+                                    <i class="fas fa-book"></i>
+                                    <h4>Nhận biết dấu hiệu gian lận thẻ tín dụng</h4>
+                                </div>
+                                <div class="knowledge-meta">
+                                    <span><i class="fas fa-user"></i> Nguyễn Văn Admin</span>
+                                    <span><i class="fas fa-calendar"></i> 08/04/2025</span>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-item">
+                                <div class="knowledge-title">
+                                    <i class="fas fa-book"></i>
+                                    <h4>Giải thích các thuật toán phát hiện gian lận</h4>
+                                </div>
+                                <div class="knowledge-meta">
+                                    <span><i class="fas fa-user"></i> Trần Thị Quản Trị</span>
+                                    <span><i class="fas fa-calendar"></i> 03/04/2025</span>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-item">
+                                <div class="knowledge-title">
+                                    <i class="fas fa-book"></i>
+                                    <h4>Các bước xử lý khi phát hiện giao dịch bất thường</h4>
+                                </div>
+                                <div class="knowledge-meta">
+                                    <span><i class="fas fa-user"></i> Lê Văn Chuyên Gia</span>
+                                    <span><i class="fas fa-calendar"></i> 28/03/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

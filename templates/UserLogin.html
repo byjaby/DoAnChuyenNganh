@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/UserLogin.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+
+        <div class="loading" id="loading" style="display:none;">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="form-container">
+            <div id="login-form">
+                <h1>Đăng nhập</h1>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="message {{ category }}" id="login-error">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form id="form-login" method="POST" action="{{ url_for('auth.login_post') }}">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email hoặc tên đăng nhập</label>
+                        <input type="text" id="email" name="email" class="form-input" placeholder="Nhập email hoặc tên đăng nhập" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                    </div>
+
+                    <div class="remember-section">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="remember" name="remember" class="remember-checkbox">
+                            <label for="remember" class="remember-label">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a class="forgot-link" id="forgot-password">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                </form>
+            </div>
+
+            <div id="reset-form" class="reset-form" style="display: none;">
+                <h1>Khôi phục mật khẩu</h1>
+                <div class="error-message" id="reset-error"></div>
+                <div class="success-message" id="reset-success"></div>
+
+                <form id="form-reset">
+                    <div class="form-group">
+                        <label for="reset-email" class="form-label">Email</label>
+                        <input type="email" id="reset-email" class="form-input" placeholder="Nhập email đăng ký" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Gửi liên kết khôi phục</button>
+                </form>
+
+                <div class="back-to-login">
+                    <a class="back-link" id="back-to-login">Quay lại đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('form-login');
+            const loading = document.getElementById('loading');
+            const forgotPasswordLink = document.getElementById('forgot-password');
+            const backToLoginLink = document.getElementById('back-to-login');
+            const loginFormDiv = document.getElementById('login-form');
+            const resetForm = document.getElementById('reset-form');
+            const resetError = document.getElementById('reset-error');
+            const resetSuccess = document.getElementById('reset-success');
+
+            // Hiển thị loading khi gửi form đăng nhập
+            loginForm?.addEventListener('submit', () => {
+                if (loading) loading.style.display = 'flex';
+            });
+
+            // Điều hướng tới form khôi phục mật khẩu
+            forgotPasswordLink?.addEventListener('click', () => {
+                loginFormDiv.style.display = 'none';
+                resetForm.style.display = 'block';
+            });
+
+            // Quay lại form đăng nhập từ form khôi phục mật khẩu
+            backToLoginLink?.addEventListener('click', () => {
+                resetForm.style.display = 'none';
+                loginFormDiv.style.display = 'block';
+            });
+
+            // Xử lý gửi form khôi phục mật khẩu
+            const resetFormElement = document.getElementById('form-reset');
+            if (resetFormElement) {
+                resetFormElement.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const resetEmail = document.getElementById('reset-email').value.trim();
+
+                    if (resetError) resetError.style.display = 'none';
+                    if (resetSuccess) resetSuccess.style.display = 'none';
+
+                    if (!resetEmail) {
+                        resetError.textContent = 'Vui lòng nhập email của bạn.';
+                        resetError.style.display = 'block';
+                        return;
+                    }
+
+                    if (loading) loading.style.display = 'flex';
+
+                    setTimeout(() => {
+                        resetSuccess.textContent = 'Liên kết khôi phục mật khẩu đã được gửi đến email của bạn.';
+                        resetSuccess.style.display = 'block';
+                        document.getElementById('reset-email').value = '';
+
+                        if (loading) loading.style.display = 'none';
+
+                        setTimeout(() => {
+                            resetForm.style.display = 'none';
+                            loginFormDiv.style.display = 'block';
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+
+            checkSavedCredentials();
+        });
+
+        // Kiểm tra email và mật khẩu đã lưu
+        function checkSavedCredentials() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const rememberCheckbox = document.getElementById('remember');
+
+            const savedEmail = localStorage.getItem('savedEmail');
+            const savedPassword = localStorage.getItem('savedPassword');
+
+            if (savedEmail && savedPassword) {
+                emailInput.value = savedEmail;
+                passwordInput.value = savedPassword;
+                rememberCheckbox.checked = true;
+            }
+        }
+    </script>
+</body>
+</html>

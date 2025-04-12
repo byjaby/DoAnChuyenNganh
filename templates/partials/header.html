@@ -1,0 +1,31 @@
+<header>
+    <div class="container">
+        <div class="header-content">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SafeCredit</span>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Giao dịch</a></li>
+                    <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Báo cáo gian lận</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Kiến thức</a></li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i> Tin tức</a></li>
+
+                    {% if user_info.user_id %}
+                        <!-- Hiển thị thông tin người dùng -->
+                        <li class="user-info">
+                            <span>Chào, {{ user_info.full_name }} - Nhân viên</span>
+                        </li>
+                        <li><a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login_get') }}"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

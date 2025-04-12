@@ -1,0 +1,26 @@
+<section class="news-section">
+        <div class="container">
+            <h2 class="section-title">Tin tức mới nhất</h2>
+            <div class="news-grid">
+                {% for news in news_items %}
+                <div class="news-card">
+                    <div class="news-content">
+                        <span class="news-date"><i class="far fa-calendar-alt"></i>{{ news.date }}</span>
+                        <h3>{{ news.title }}</h3>
+                        <p>
+    {{ news.content[:120] }}{% if news.content|length > 120 %}...{% endif %}
+</p>
+{% if news.content|length > 120 %}
+    <a href="#">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if has_more_news %}
+    <div class="see-more">
+        <a href="{{ url_for('news.all_news') }}" class="btn">Xem thêm tin tức <i class="fas fa-arrow-right"></i></a>
+    </div>
+{% endif %}
+        </div>
+    </section>

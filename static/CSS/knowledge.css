@@ -1,0 +1,284 @@
+/* Nút Thêm Tin Tức */
+.btn-add-news {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-add-news:hover {
+    background-color: #0056b3;
+}
+
+/* Card chứa tin tức */
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    color: #333;
+}
+
+/* News Item */
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    position: relative;
+}
+
+.news-icon {
+    font-size: 30px;
+    margin-right: 15px;
+    color: #007bff;
+}
+
+.news-info h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #222;
+}
+
+.news-date {
+    font-size: 13px;
+    color: gray;
+    margin: 5px 0;
+}
+
+.news-info p {
+    text-align: justify;
+    margin: 0;
+    font-size: 15px;
+    color: #444;
+}
+
+/* Action buttons (Sửa + Xóa) */
+.news-actions a {
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 5px;
+    transition: transform 0.2s;
+}
+
+.news-actions a:hover {
+    transform: scale(1.2);
+}
+
+#add-news-form {
+    max-width: 90%; /* Giới hạn chiều rộng form */
+    width: 100%;
+    margin: 0 auto; /* Căn giữa */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+#add-news-form input[type="text"],
+#add-news-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+#add-news-form input[type="text"]:focus,
+#add-news-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#add-news-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#add-news-form .btn-add-news {
+    background-color: #007bff;
+    color: white;
+}
+
+#add-news-form .btn-add-news:hover {
+    background-color: #0056b3;
+}
+
+#add-news-form .btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+#add-news-form .btn-cancel:hover {
+    background-color: #495057;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    background-color: #eee;
+    color: #333;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+#edit-news-modal {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    margin: 10% auto;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#edit-news-modal h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#edit-news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#edit-news-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#edit-news-form input[type="text"],
+#edit-news-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+#edit-news-form .form-actions {
+    text-align: right;
+    margin-top: 10px;
+}
+
+#edit-news-form button {
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-news-form .btn-save {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+}
+
+#edit-news-form .btn-save:hover {
+    background-color: #0056b3;
+}
+
+#edit-news-form .btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+#edit-news-form .btn-cancel:hover {
+    background-color: #495057;
+}
+
+#edit-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+    display: none;
+}
+
+#edit-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.flash-messages {
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.flash {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 6px solid #28a745;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 6px solid #dc3545;
+}
