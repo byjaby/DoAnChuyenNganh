@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý người dùng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/user.css') }}">
+</head>
+<body>
+<div class="main-content">
+    <h2 class="page-title">Danh sách người dùng</h2>
+
+    <div style="text-align: right; margin-bottom: 15px;">
+            <a href="/adduser" class="btn-add-user">
+                <i class="fas fa-plus-circle"></i> Thêm người dùng
+            </a>
+        </div>
+
+    <!-- Form thêm -->
+    <div id="add-user-form" style="display: none;" class="mb-4">
+        <form id="userForm">
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <input type="text" name="full_name" class="form-control" placeholder="Họ tên" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <select name="role" class="form-select" required>
+                        <option value="">Chọn vai trò</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</button>
+                    <button type="button" class="btn btn-secondary" onclick="toggleAddUserForm()">Hủy</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bảng danh sách -->
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Tên đăng nhập</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Ngày tạo</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.user_id }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="openEditUser('{{ user.user_id }}', '{{ user.full_name }}', '{{ user.username }}', '{{ user.email }}', '{{ user.role }}')" class="btn btn-warning btn-sm">
+                        <i class="fa fa-edit"></i> Sửa
+                    </a>
+                    <a href="{{ url_for('user.delete_user', user_id=user.user_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xoá?')">
+                        <i class="fa fa-trash"></i> Xoá
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal chỉnh sửa -->
+<div id="edit-modal-overlay" onclick="closeEditUser()" style="display: none;"></div>
+<div id="edit-modal" class="modal fade show" style="display: none;">
+    <div class="modal-dialog">
+        <form id="editUserForm" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa người dùng</h5>
+                <button type="button" class="btn-close" onclick="closeEditUser()"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-user-id" name="user_id">
+                <input type="text" id="edit-full-name" name="full_name" class="form-control mb-2" placeholder="Họ tên" required>
+                <input type="text" id="edit-username" name="username" class="form-control mb-2" placeholder="Tên đăng nhập" required>
+                <input type="email" id="edit-email" name="email" class="form-control mb-2" placeholder="Email" required>
+                <select id="edit-role" name="role" class="form-select" required>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                <button type="button" class="btn btn-secondary" onclick="closeEditUser()">Hủy</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleAddUserForm() {
+    const form = document.getElementById("add-user-form");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+}
+
+// Thêm người dùng mới
+document.getElementById("userForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    const response = await fetch("/user/add", {
+        method: "POST",
+        body: formData
+    });
+
+    if (response.ok) {
+        alert("Thêm người dùng thành công!");
+        location.reload();
+    } else {
+        alert("Lỗi khi thêm người dùng.");
+    }
+});
+
+// Mở modal sửa
+function openEditUser(id, fullName, username, email, role) {
+    document.getElementById("edit-user-id").value = id;
+    document.getElementById("edit-full-name").value = fullName;
+    document.getElementById("edit-username").value = username;
+    document.getElementById("edit-email").value = email;
+    document.getElementById("edit-role").value = role;
+
+    document.getElementById("edit-modal").style.display = "block";
+    document.getElementById("edit-modal-overlay").style.display = "block";
+}
+
+// Đóng modal sửa
+function closeEditUser() {
+    document.getElementById("edit-modal").style.display = "none";
+    document.getElementById("edit-modal-overlay").style.display = "none";
+}
+
+// Xử lý cập nhật người dùng
+document.getElementById("editUserForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    const response = await fetch("/user/edit", {
+        method: "POST",
+        body: formData
+    });
+
+    if (response.ok) {
+        alert("Cập nhật thành công!");
+        location.reload();
+    } else {
+        alert("Cập nhật thất bại!");
+    }
+});
+</script>
+</body>
+</html>
