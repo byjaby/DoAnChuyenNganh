@@ -2,7 +2,6 @@ from flask import Blueprint, request, render_template, redirect, url_for, sessio
 from werkzeug.security import check_password_hash
 from models import User
 from database import SessionLocal
-import logging
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -39,3 +38,4 @@ def login_post():
 def logout():
     session.clear()  # Clear session on logout
     return redirect(url_for("home"))  # Redirect to home page after logout
+

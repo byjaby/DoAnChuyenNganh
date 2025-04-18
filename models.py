@@ -40,8 +40,7 @@ class FraudReport(Base):
     report_time = Column(TIMESTAMP, default=datetime.utcnow)
     status = Column(String(20), default='pending')
     details = Column(JSONB)
-
-vietnam_tz = timezone('Asia/Ho_Chi_Minh')
+    vietnam_tz = timezone('Asia/Ho_Chi_Minh')
 
 class News(Base):
     __tablename__ = 'news'

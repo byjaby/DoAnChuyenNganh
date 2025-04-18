@@ -167,7 +167,7 @@
     font-weight: bold;
 }
 
-#edit-news-modal {
+#edit-knowledge-modal {
     background-color: white;
     padding: 25px;
     border-radius: 10px;
@@ -186,19 +186,19 @@
     font-weight: bold;
 }
 
-#edit-news-form {
+#edit-knowledge-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#edit-news-form label {
+#edit-knowledge-form label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-#edit-news-form input[type="text"],
-#edit-news-form textarea {
+#edit-knowledge-form input[type="text"],
+#edit-knowledge-form textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -208,12 +208,12 @@
     resize: vertical;
 }
 
-#edit-news-form .form-actions {
+#edit-knowledge-form .form-actions {
     text-align: right;
     margin-top: 10px;
 }
 
-#edit-news-form button {
+#edit-knowledge-form button {
     padding: 10px 18px;
     font-size: 16px;
     font-weight: bold;
@@ -223,22 +223,22 @@
     transition: background-color 0.3s ease;
 }
 
-#edit-news-form .btn-save {
+#edit-knowledge-form .btn-save {
     background-color: #007bff;
     color: white;
     margin-right: 10px;
 }
 
-#edit-news-form .btn-save:hover {
+#edit-knowledge-form .btn-save:hover {
     background-color: #0056b3;
 }
 
-#edit-news-form .btn-cancel {
+#edit-knowledge-form .btn-cancel {
     background-color: #6c757d;
     color: white;
 }
 
-#edit-news-form .btn-cancel:hover {
+#edit-knowledge-form .btn-cancel:hover {
     background-color: #495057;
 }
 
@@ -258,6 +258,16 @@
     justify-content: center;
     align-items: center;
 }
+
+#edit-knowledge-modal {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 
 .flash-messages {
     margin-bottom: 15px;

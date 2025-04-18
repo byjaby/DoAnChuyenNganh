@@ -5,7 +5,7 @@ from sqlalchemy import text
 from models import KnowledgeBase
 from math import ceil
 
-knowledgeBase_bp = Blueprint("knowledgeBase", __name__, url_prefix="/knowledgeBase")
+knowledgeBase_bp = Blueprint("knowledgeBase", __name__, url_prefix="/admin/knowledgeBase")
 
 @knowledgeBase_bp.route("/")
 def knowledge_list():
@@ -27,9 +27,9 @@ def knowledge_list():
         """), {'limit': per_page, 'offset': offset}).mappings().all()
 
         knowledge = list(result)
-        return render_template("knowledgeBase.html", knowledge=knowledge, page=page, total_pages=total_pages)
+        return render_template("admin/knowledgeBase.html", knowledge=knowledge, page=page, total_pages=total_pages)
     except Exception as e:
-        print(f"[ERROR] /knowledgeBase: {e}")
+        print(f"[ERROR] admin/knowledgeBase: {e}")
         return "Internal Server Error", 500
     finally:
         db.close()
@@ -49,7 +49,7 @@ def api_add_knowledge():
         db.commit()
         return jsonify({"message": "Knowledge base article added successfully"}), 200
     except Exception as e:
-        print(f"[ERROR] /knowledgeBase/add: {e}")
+        print(f"[ERROR] /admin/knowledgeBase/add: {e}")
         db.rollback()
         return jsonify({"error": "Failed to add knowledge base article"}), 500
     finally:
@@ -73,11 +73,11 @@ def edit_knowledge():
             'knowledge_id': knowledge_id
         })
         db.commit()
-        return redirect("/knowledgeBase")
+        return redirect("/admin/knowledgeBase")
     except Exception as e:
         print(f"[ERROR] Edit knowledge base: {e}")
         db.rollback()
-        return redirect("/knowledgeBase")
+        return redirect("/admin/knowledgeBase")
     finally:
         db.close()
 
@@ -89,7 +89,7 @@ def delete_knowledge():
     try:
         db.execute(text("DELETE FROM knowledge_base WHERE knowledge_id = :knowledge_id"), {'knowledge_id': knowledge_id})
         db.commit()
-        return redirect("/knowledgeBase")
+        return redirect("/admin/knowledgeBase")
     except Exception as e:
         print(f"[ERROR] delete_knowledge: {e}")
         db.rollback()

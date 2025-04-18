@@ -5,7 +5,7 @@ from sqlalchemy import text
 from models import News
 from math import ceil
 
-news_bp = Blueprint("news", __name__, url_prefix="/news")
+news_bp = Blueprint("news", __name__, url_prefix="/admin/news")
 
 def get_latest_news(limit=6):
     db = SessionLocal()
@@ -42,9 +42,9 @@ def news_list():
         """), {'limit': per_page, 'offset': offset}).mappings().all()
 
         news = list(result)
-        return render_template("news.html", news=news, page=page, total_pages=total_pages)
+        return render_template("admin/news.html", news=news, page=page, total_pages=total_pages)
     except Exception as e:
-        print(f"[ERROR] /news: {e}")
+        print(f"[ERROR] /admin/news: {e}")
         return "Internal Server Error", 500
     finally:
         db.close()
@@ -63,7 +63,7 @@ def api_add_news():
         db.commit()
         return jsonify({"message": "News added successfully"}), 200
     except Exception as e:
-        print(f"[ERROR] /add-news: {e}")
+        print(f"[ERROR] /admin/add-news: {e}")
         db.rollback()
         return jsonify({"error": "Failed to add news"}), 500
     finally:
@@ -86,11 +86,11 @@ def edit_news():
             'news_id': news_id
         })
         db.commit()
-        return redirect("/news")
+        return redirect("/admin/news")
     except Exception as e:
         print(f"[ERROR] Edit news: {e}")
         db.rollback()
-        return redirect("/news")
+        return redirect("/admin/news")
     finally:
         db.close()
 
@@ -101,29 +101,10 @@ def delete_news_post():
     try:
         db.execute(text("DELETE FROM news WHERE news_id = :news_id"), {'news_id': news_id})
         db.commit()
-        return redirect("/news")
+        return redirect("/admin/news")
     except Exception as e:
         print(f"[ERROR] delete_news_post: {e}")
         db.rollback()
         return "Đã xảy ra lỗi khi xóa tin tức.", 500
     finally:
         db.close()
-
-@news_bp.route("/tintuc")
-def all_news():
-    db = SessionLocal()
-    news_list = (
-        db.query(News)
-        .order_by(News.created_at.desc())
-        .all()
-    )
-    db.close()
-    news_data = [
-        {
-            "title": n.title,
-            "content": n.content,
-            "date": n.created_at.strftime("%d/%m/%Y")
-        }
-        for n in news_list
-    ]
-    return render_template("AllNews.html", news_items=news_data)

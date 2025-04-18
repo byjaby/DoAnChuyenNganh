@@ -12,7 +12,7 @@
 
         <!-- Nút thêm tin tức -->
         <div style="text-align: right; margin-bottom: 15px;">
-            <a href="/addnews" class="btn-add-news">
+            <a class="btn-add-news">
                 <i class="fas fa-plus-circle"></i> Thêm tin tức
             </a>
         </div>
@@ -116,7 +116,7 @@
             content: formData.get("content")
         };
 
-        const response = await fetch("/news/add", {
+        const response = await fetch("/admin/news/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -159,7 +159,7 @@ document.getElementById("edit-news-form").addEventListener("submit", async funct
     formData.append("content", content);
 
     try {
-        const response = await fetch("/news/edit", {
+        const response = await fetch("/admin/news/edit", {
             method: "POST",
             body: formData
         });
@@ -178,7 +178,7 @@ document.getElementById("edit-news-form").addEventListener("submit", async funct
 
 function deleteNews(newsId) {
     if (confirm("Bạn có chắc muốn xóa tin này?")) {
-        fetch("/news/delete", {
+        fetch("/admin/news/delete", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"

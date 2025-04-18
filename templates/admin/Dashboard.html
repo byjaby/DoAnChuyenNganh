@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Hệ Thống Chống Gian Lận Thẻ Tín Dụng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/dashboard.css') }}">
 
 </head>
 <body>
@@ -38,15 +38,15 @@
             </a>
 
             <div class="menu-category">Nội dung</div>
-            <a href="/news" class="menu-item">
+            <a href="admin/news" class="menu-item">
                 <i class="fas fa-newspaper"></i> Quản lý tin tức
             </a>
-            <a href="/knowledgeBase" class="menu-item">
+            <a href="admin/knowledgeBase" class="menu-item">
                 <i class="fas fa-book"></i> Cơ sở kiến thức
             </a>
 
             <div class="menu-category">Quản lý người dùng</div>
-            <a href="#" class="menu-item">
+            <a href="/user" class="menu-item">
                 <i class="fas fa-users"></i> Danh sách người dùng
             </a>
             <a href="#" class="menu-item">

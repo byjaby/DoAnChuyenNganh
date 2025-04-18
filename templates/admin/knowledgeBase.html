@@ -12,7 +12,7 @@
 
     <!-- Nút thêm kiến thức -->
     <div style="text-align: right; margin-bottom: 15px;">
-        <a href="#" class="btn-add-news">
+        <a class="btn-add-news">
             <i class="fas fa-plus-circle"></i> Thêm kiến thức mới
         </a>
     </div>
@@ -73,19 +73,18 @@
 
 <div id="edit-modal-overlay" onclick="closeEditModal()"></div>
 
-<div id="edit-modal" style="display: none;">
-    <div id="edit-news-modal">
+<div id="edit-modal">
+    <div id="edit-knowledge-modal">
         <h3>Sửa Kiến Thức</h3>
         <form id="edit-knowledge-form" method="POST" action="/knowledgeBase/edit">
             <input type="hidden" id="edit-knowledge-id" name="knowledge_id">
-            <div>
-                <label for="edit-title">Tiêu đề:</label>
-                <input type="text" id="edit-title" name="title">
-            </div>
-            <div>
-                <label for="edit-content">Nội dung:</label>
-                <textarea id="edit-content" name="content" rows="5"></textarea>
-            </div>
+
+            <label for="edit-title">Tiêu đề:</label>
+            <input type="text" id="edit-title" name="title">
+
+            <label for="edit-content">Nội dung:</label>
+            <textarea id="edit-content" name="content" rows="5"></textarea>
+
             <div class="form-actions">
                 <button type="submit" class="btn-save">Lưu thay đổi</button>
                 <button type="button" class="btn-cancel" onclick="closeEditModal()">Hủy</button>
@@ -93,6 +92,7 @@
         </form>
     </div>
 </div>
+
 </body>
 </html>
 
@@ -115,7 +115,7 @@
             content: formData.get("content")
         };
 
-        const response = await fetch("/knowledgeBase/add", {
+        const response = await fetch("/admin/knowledgeBase/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -155,7 +155,7 @@
         formData.append("content", content);
 
         try {
-            const response = await fetch("/knowledgeBase/edit", {
+            const response = await fetch("/admin/knowledgeBase/edit", {
                 method: "POST",
                 body: formData
             });
@@ -174,7 +174,7 @@
 
     function deleteKnowledge(id) {
         if (confirm("Bạn có chắc muốn xóa bài viết này?")) {
-            fetch("/knowledgeBase/delete", {
+            fetch("/admin/knowledgeBase/delete", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `knowledge_id=${id}`
